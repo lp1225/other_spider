@@ -20,7 +20,7 @@ class SpiderQiuBai:
 
     def send_request(self, url):
         response = requests.get(url, headers=self.headers)
-        data = response.content.decode('utf-8')
+        data = response.text
         return data
 
     def get_content_list(self, html_str):
@@ -41,7 +41,7 @@ class SpiderQiuBai:
             if div:
                 user_name = div.a['title']
                 content = div.a.get_text()
-                item['user_name'] = user_name
+                item['article_title'] = user_name
                 item['content'] = content
                 content_list.append(item)
 
@@ -55,7 +55,7 @@ class SpiderQiuBai:
             print(content_list)
 
 
-if __name__ =='__main__':
+if __name__ == '__main__':
     t1 = time.time()
     qiubai = SpiderQiuBai()
     qiubai.run()
